@@ -8,7 +8,7 @@ const Home = () => {
     const [services, setServices] = useState([])
 
     useEffect(() => {
-        fetch('http://localhost:5000/defaultServices')
+        fetch('https://eye-care-server-ifazzzz.vercel.app/defaultServices')
         .then(res => res.json())
         .then(data => setServices(data))
     },[])
