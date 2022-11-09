@@ -5,6 +5,7 @@ import Root from "../layout/Root";
 import Blog from "../pages/Blog/Blog";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import Home from "../pages/Home/Home";
+import ServiceDetails from "../pages/Services/ServiceDetails";
 import Services from "../pages/Services/Services";
 
 export const router = createBrowserRouter([
@@ -24,7 +25,13 @@ export const router = createBrowserRouter([
             
             {
                 path : '/services',
-                element : <Services></Services>
+                element : <Services></Services>,
+                loader : () => fetch('https://eye-care-server.vercel.app/services')
+            },
+            {
+                path : '/services/:id',
+                element : <ServiceDetails></ServiceDetails>,
+                loader : ({params}) => fetch(`https://eye-care-server.vercel.app/services/${params.id}`)
             },
             {
                 path : '/login',

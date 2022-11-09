@@ -1,6 +1,18 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import img from '../../Assests/pexels-cottonbro-studio-7580252.jpg';
+import DefaultServices from './DefaultServices';
+
 const Home = () => {
+
+    const [services, setServices] = useState([])
+
+    useEffect(() => {
+        fetch('http://localhost:5000/defaultServices')
+        .then(res => res.json())
+        .then(data => setServices(data))
+    },[])
+
     return (
         <div>
             {/* Banner section */}
@@ -169,6 +181,18 @@ const Home = () => {
                     </a>
                     </div>
                 </div>
+            </div>
+            {/* service section */}
+            <div className="my-12 container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {
+                    services.map(service => <DefaultServices
+                    key={service._id}
+                    service={service}
+                    ></DefaultServices>)
+                }               
+            </div>
+            <div className="container my-8 mx-auto text-center">
+                    <Link to='/services'><button className="bg-teal-400 rounded-md px-4 py-2 ">View All</button></Link>
             </div>
             {/* pricing section */}
             <section className="mb-24 py-2 text-gray-800">
