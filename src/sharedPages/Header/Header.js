@@ -1,9 +1,19 @@
 import {  Navbar } from 'flowbite-react';
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link} from 'react-router-dom';
 import logo from '../../Assests/icons8-eye-64.png';
+import { AuthContext } from '../../Contexts/AuthProvider.js/AuthProvider';
 
 const Header = () => {
+    
+    const {user, logOut} = useContext(AuthContext)
+
+    const handleLogOut = () => {
+         logOut()
+        .then(() =>{})
+        .catch(() =>{})
+    }
+
     return (
         <div>
             <Navbar
@@ -23,9 +33,16 @@ const Header = () => {
                 </Navbar.Brand>
                 </Link>
                 <div className="flex md:order-2">
+                    {
+                        user?.uid? 
+                    <Link>                   
+                    <button onClick={handleLogOut}  className="text-base text-white font-semibold px-4 py-2 rounded-md hover:bg-sky-800 bg-sky-600">Logout</button>                   
+                    </Link>
+                    :
                     <Link>                   
                     <button  className="text-base text-white font-semibold px-4 py-2 rounded-md hover:bg-sky-800 bg-sky-600">Login</button>                   
                     </Link>
+                    }
                     <Navbar.Toggle />
                 </div>
                 <Navbar.Collapse>
@@ -39,6 +56,16 @@ const Header = () => {
                     <Link className="text-base" to='Blog'><Navbar.Link >
                     Blog
                     </Navbar.Link></Link>
+                    {user?.uid && 
+                    <>
+                    <Link className="text-base" to='myReviews'><Navbar.Link >
+                    My Reviews
+                    </Navbar.Link></Link>
+                    <Link className="text-base" to='addService'><Navbar.Link >
+                    Add Service
+                    </Navbar.Link></Link>
+                    </>
+                    }
                 </Navbar.Collapse>
             </Navbar>
         </div>

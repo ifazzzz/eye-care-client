@@ -1,7 +1,9 @@
-import React from 'react';
-import { useLoaderData } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link, useLoaderData } from 'react-router-dom';
+import { AuthContext } from '../../Contexts/AuthProvider.js/AuthProvider';
 
 const ServiceDetails = () => {
+    const {user} = useContext(AuthContext)
     const service = useLoaderData({})
     const {_id, img, name, price, description, rating} = service;
 
@@ -27,6 +29,20 @@ const ServiceDetails = () => {
                 </div>
                 <div className="p-4 space-y-2 text-sm text-gray-600">
                     <p>{description}</p>
+                </div>
+            </div>
+
+            <div className="my-12">
+                <h1 className="text-center text-2xl font-bold">
+                    Reviews
+                </h1>
+                
+                <div>
+                    {
+                        user?.uid?
+                        <Link to='/addReview'><button className="bg-sky-700">Add a review</button></Link> :
+                        <p>please <Link className="text-purple-600" to='/login'>login</Link> to add a review</p>
+                    }
                 </div>
             </div>
         </div>
