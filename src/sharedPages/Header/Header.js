@@ -39,7 +39,7 @@ const Header = () => {
                     <button onClick={handleLogOut}  className="text-base text-white font-semibold px-4 py-2 rounded-md hover:bg-sky-800 bg-sky-600">Logout</button>                   
                     </Link>
                     :
-                    <Link>                   
+                    <Link to="/login">                   
                     <button  className="text-base text-white font-semibold px-4 py-2 rounded-md hover:bg-sky-800 bg-sky-600">Login</button>                   
                     </Link>
                     }
