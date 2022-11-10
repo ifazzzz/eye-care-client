@@ -1,13 +1,35 @@
 import React, { useContext } from 'react';
+import { useLoaderData } from 'react-router-dom';
 import { AuthContext } from '../Contexts/AuthProvider.js/AuthProvider';
 
+
 const AddReview = () => {
+
+    const service = useLoaderData({})
+    const {_id,name} = service;
     const {user} = useContext(AuthContext)
-    
-    const addReview = event => {
+
+    const addReview = (event) => {
         event.preventDefault();
         const message = event.target.message.value;
-        console.log(message);
+
+        const review = {
+            email : user.email,
+            serviceId : _id,
+            name : name,
+            message : message
+        }
+        console.log(review);
+
+        fetch('https://eye-care-server-ifazzzz.vercel.app/addReview', {
+            method : 'POST',
+            headers : {
+                'content-type': 'application/json'
+            },
+            body : JSON.stringify(review)
+
+        })
+
     }
 
     return (
@@ -47,6 +69,7 @@ const AddReview = () => {
                     </div>
                     <div className="flex flex-col w-full">
                         <form onSubmit={addReview}>
+                           <input type="text" name="name" id="" /> 
                         <textarea rows="3" name="message" placeholder="Message..." className="p-4 rounded-md resize-none text-gray-800 bg-gray-50"></textarea>
                         <button type="submit" className="py-4 my-8 font-semibold rounded-md text-gray-50 bg-cyan-600">Leave feedback</button>
                         </form>
@@ -54,7 +77,7 @@ const AddReview = () => {
                     </div>
                 </div>
                 <div className="flex items-center justify-center">
-                    <a rel="noopener noreferrer" href="#" className="text-sm text-gray-600">Maybe later</a>
+                    <a className="text-sm text-gray-600">Maybe later</a>
                 </div>
             </div>
         </div>

@@ -1,15 +1,15 @@
 import { createBrowserRouter } from "react-router-dom";
 import Login from "../Authentication/Login/Login";
 import SignUp from "../Authentication/Registration/SignUp";
-import AddReview from "../AddReview/AddReview";
+import AddReview from "../Reviews/AddReview";
 import Root from "../layout/Root";
 import AddService from "../pages/AddService/AddService";
 import Blog from "../pages/Blog/Blog";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import Home from "../pages/Home/Home";
-import Myreviews from "../pages/MyReviews/Myreviews";
 import ServiceDetails from "../pages/Services/ServiceDetails";
 import Services from "../pages/Services/Services";
+import MyReviews from "../pages/MyReviews/MyReviews";
 
 export const router = createBrowserRouter([
     {
@@ -50,15 +50,16 @@ export const router = createBrowserRouter([
             },
             {
                 path : '/myReviews',
-                element : <Myreviews></Myreviews>
+                element : <MyReviews></MyReviews>
             },
             {
                 path : '/addService',
                 element : <AddService></AddService>
             },
             {
-                path: '/addReview',
-                element:<AddReview></AddReview>
+                path: '/addReview/:id',
+                element:<AddReview></AddReview>,
+                loader : ({params}) => fetch(`https://eye-care-server.vercel.app/services/${params.id}`)
             }
             
         ]
