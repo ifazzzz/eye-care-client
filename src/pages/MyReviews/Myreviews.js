@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../Contexts/AuthProvider.js/AuthProvider';
-import toast  from 'react-hot-toast';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import MyReviewsCard from './MyReviewsCard';
 
 const MyReviews = () => {
@@ -52,6 +53,7 @@ const MyReviews = () => {
         </div>
 
         }
+        <ToastContainer/>
         </>
     );
 };

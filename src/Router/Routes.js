@@ -29,7 +29,7 @@ export const router = createBrowserRouter([
             {
                 path : '/services',
                 element : <Services></Services>,
-                loader : () => fetch('https://eye-care-server.vercel.app/services')
+                loader : () => fetch('http://localhost:5000/services')
             },
             {
                 path : '/services/:id',
