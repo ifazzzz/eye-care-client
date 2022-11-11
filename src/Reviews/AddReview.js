@@ -1,25 +1,29 @@
 import React, { useContext } from 'react';
-import { useLoaderData } from 'react-router-dom';
 import { AuthContext } from '../Contexts/AuthProvider.js/AuthProvider';
 
 
-const AddReview = () => {
+const AddReview = ({id}) => {
 
-    const service = useLoaderData({})
-    const {_id,name} = service;
-    const {user} = useContext(AuthContext)
+    const serviceId = id;
+
+    const {user, loader} = useContext(AuthContext)
 
     const addReview = (event) => {
         event.preventDefault();
-        const message = event.target.message.value;
+        const form = event.target
+        const message = form.message.value;
+        const rating = form.rating.value;
 
         const review = {
+            name : user.displayName,
+            photoURL : user.photoURL,
             email : user.email,
-            serviceId : _id,
-            name : name,
+            serviceId : serviceId,
+            rating : rating,
             message : message
         }
         console.log(review);
+        form.reset();
 
         fetch('https://eye-care-server-ifazzzz.vercel.app/addReview', {
             method : 'POST',
@@ -29,56 +33,68 @@ const AddReview = () => {
             body : JSON.stringify(review)
 
         })
+        .then(res => res.json())
+        .then(data => {
+            if(loader){
+                return <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-cyan-600"></div>
+            }
+            console.log(data)})
 
     }
 
     return (
-        <div>
-            <div className="flex flex-col max-w-xl p-8 shadow-sm rounded-xl lg:p-12 bg-gray-50 text-gray-800">
-                <div className="flex flex-col items-center w-full">
-                    <h2 className="text-3xl font-semibold text-center">Your opinion matters!</h2>
-                    <div className="flex flex-col items-center py-6 space-y-3">
-                        <span className="text-center">How was your experience?</span>
-                        <div className="flex space-x-3">
-                            <button type="button" title="Rate 1 stars" aria-label="Rate 1 stars">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-10 h-10 text-yellow-500">
-                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                                </svg>
-                            </button>
-                            <button type="button" title="Rate 2 stars" aria-label="Rate 2 stars">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-10 h-10 text-yellow-500">
-                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                                </svg>
-                            </button>
-                            <button type="button" title="Rate 3 stars" aria-label="Rate 3 stars">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-10 h-10 text-yellow-500">
-                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                                </svg>
-                            </button>
-                            <button type="button" title="Rate 4 stars" aria-label="Rate 4 stars">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-10 h-10 text-yellow-500">
-                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                                </svg>
-                            </button>
-                            <button type="button" title="Rate 5 stars" aria-label="Rate 5 stars">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-10 h-10 text-gray-400">
-                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                    <div className="flex flex-col w-full">
-                        <form onSubmit={addReview}>
-                           <input type="text" name="name" id="" /> 
-                        <textarea rows="3" name="message" placeholder="Message..." className="p-4 rounded-md resize-none text-gray-800 bg-gray-50"></textarea>
-                        <button type="submit" className="py-4 my-8 font-semibold rounded-md text-gray-50 bg-cyan-600">Leave feedback</button>
-                        </form>
-                        
-                    </div>
-                </div>
-                <div className="flex items-center justify-center">
-                    <a className="text-sm text-gray-600">Maybe later</a>
-                </div>
+        <div className="my-12">
+            <div className="mx-auto w-full max-w-xl xl:px-8 xl:w-5/12">
+              <div className="bg-white rounded shadow-2xl p-7 sm:p-10">
+                <h3 className="mb-4 text-xl font-semibold sm:text-center sm:mb-6 sm:text-2xl">
+                  How Was Your Experience ?
+                </h3>
+                <form onSubmit={addReview}>
+                  <div className="mb-1 sm:mb-2">
+                    <label
+                      htmlFor="firstName"
+                      className="inline-block mb-1 font-medium"
+                    >
+                      Rate Out of 5
+                    </label>
+                    <input
+                      
+                      required
+                      type="text"
+                      className="flex-grow w-full h-12 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:border-deep-purple-accent-400 focus:outline-none focus:shadow-outline"
+                      
+                      name="rating"
+                    />
+                  </div>
+                  <div className="mb-1 sm:mb-2">
+                    <label
+                      htmlFor="lastName"
+                      className="inline-block mb-1 font-medium"
+                    >
+                      Message
+                    </label>
+                    <textarea
+                      placeholder="Leave your feedback here"
+                      required
+                      type="text"
+                      className="flex-grow w-full h-32 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:border-deep-purple-accent-400 focus:outline-none focus:shadow-outline"                    
+                      name="message"
+                    />
+                  </div>
+                  
+                  <div className="mt-4 mb-2 sm:mb-4">
+                    <button
+                      type="submit"
+                      className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-sky-400 hover:bg-sky-700 focus:shadow-outline focus:outline-none"
+                    >
+                     Add Review
+                    </button>
+                  </div>
+                  <p className="text-xs text-gray-600 sm:text-sm">
+                    We respect your Feedback 
+                  </p>
+                </form>
+              </div>
             </div>
         </div>
     );

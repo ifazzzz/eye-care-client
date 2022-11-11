@@ -1,6 +1,6 @@
 import {  Navbar } from 'flowbite-react';
 import React, { useContext } from 'react';
-import { Link} from 'react-router-dom';
+import { NavLink} from 'react-router-dom';
 import logo from '../../Assests/icons8-eye-64.png';
 import { AuthContext } from '../../Contexts/AuthProvider.js/AuthProvider';
 
@@ -10,17 +10,17 @@ const Header = () => {
 
     const handleLogOut = () => {
          logOut()
-        .then(() =>{})
-        .catch(() =>{})
+            .then(() =>{})
+            .catch((error) =>{console.error(error)})
     }
 
     return (
-        <div>
+        <div className="px-12">
             <Navbar
                 fluid={true}
                 rounded={true}
                 >
-                <Link to='/'>
+                <NavLink to='/'>
                 <Navbar.Brand>
                     <img
                     src={logo}
@@ -31,39 +31,40 @@ const Header = () => {
                     Eye-Care
                     </span>
                 </Navbar.Brand>
-                </Link>
+                </NavLink>
                 <div className="flex md:order-2">
                     {
                         user?.uid? 
-                    <Link>                   
+                    <NavLink>                   
                     <button onClick={handleLogOut}  className="text-base text-white font-semibold px-4 py-2 rounded-md hover:bg-sky-800 bg-sky-600">Logout</button>                   
-                    </Link>
+                    </NavLink>
                     :
-                    <Link to="/login">                   
+                    <NavLink to="/login">                   
                     <button  className="text-base text-white font-semibold px-4 py-2 rounded-md hover:bg-sky-800 bg-sky-600">Login</button>                   
-                    </Link>
+                    </NavLink>
                     }
                     <Navbar.Toggle />
                 </div>
                 <Navbar.Collapse>
-                    <Link className="text-base" to='/home'><Navbar.Link                    
+                    <NavLink
+                    className="text-base" to='/home'><Navbar.Link                    
                     >
                     Home
-                    </Navbar.Link></Link>
-                    <Link className="text-base" to='services'><Navbar.Link >
+                    </Navbar.Link></NavLink>
+                    <NavLink className="text-base" to='services'><Navbar.Link >
                     Services
-                    </Navbar.Link></Link>
-                    <Link className="text-base" to='Blog'><Navbar.Link >
+                    </Navbar.Link></NavLink>
+                    <NavLink className="text-base" to='Blog'><Navbar.Link >
                     Blog
-                    </Navbar.Link></Link>
+                    </Navbar.Link></NavLink>
                     {user?.uid && 
                     <>
-                    <Link className="text-base" to='myReviews'><Navbar.Link >
+                    <NavLink className="text-base" to='myReviews'><Navbar.Link >
                     My Reviews
-                    </Navbar.Link></Link>
-                    <Link className="text-base" to='addService'><Navbar.Link >
+                    </Navbar.Link></NavLink>
+                    <NavLink className="text-base" to='addService'><Navbar.Link >
                     Add Service
-                    </Navbar.Link></Link>
+                    </Navbar.Link></NavLink>
                     </>
                     }
                 </Navbar.Collapse>

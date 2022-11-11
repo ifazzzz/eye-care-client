@@ -10,6 +10,7 @@ import Home from "../pages/Home/Home";
 import ServiceDetails from "../pages/Services/ServiceDetails";
 import Services from "../pages/Services/Services";
 import MyReviews from "../pages/MyReviews/MyReviews";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
     {
@@ -50,16 +51,15 @@ export const router = createBrowserRouter([
             },
             {
                 path : '/myReviews',
-                element : <MyReviews></MyReviews>
+                element : <PrivateRoute><MyReviews></MyReviews></PrivateRoute>
             },
             {
                 path : '/addService',
-                element : <AddService></AddService>
+                element : <PrivateRoute><AddService></AddService></PrivateRoute>
             },
             {
-                path: '/addReview/:id',
-                element:<AddReview></AddReview>,
-                loader : ({params}) => fetch(`https://eye-care-server.vercel.app/services/${params.id}`)
+                path: '/addReview',
+                element:<PrivateRoute><AddReview></AddReview></PrivateRoute>,               
             }
             
         ]

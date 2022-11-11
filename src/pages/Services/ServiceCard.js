@@ -1,4 +1,4 @@
-import { Card } from 'flowbite-react';
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import 'react-photo-view/dist/react-photo-view.css';
@@ -10,29 +10,19 @@ const ServiceCard = ({service}) => {
     
     return (
         <div className="">
-        <PhotoProvider>       
-          <PhotoView src={img}>
-             <Card imgSrc={img}>
-                    <div className="flex justify-between">
-                     <div>
-                        <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                        {name}
-                        </h5>
-                     </div>
-                     <div>
-                     <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                        Price: {price}
-                        </h5>
-                     </div>
+           <PhotoProvider> 
+                <div className="w-full p-6 rounded-md shadow-md bg-gray-50 text-gray-900">
+                    <PhotoView src={img}> 
+                        <img src={img} alt="" className="object-cover object-center w-full rounded-md h-72 bg-gray-500" />        
+                    </PhotoView>`             
+                    <div className="mt-6 mb-2">
+                        <span className="block text-xs font-medium tracking-widest uppercase text-cyan-600">Price: {price}</span>
+                        <h2 className="text-xl font-semibold tracking-wide">{name}</h2>
                     </div>
-                    <p className="font-normal text-gray-700 dark:text-gray-400">
-                    {description.length>200? description.slice(0, 200)+ '...' : description}
-                    </p>
-                    <Link to={`/services/${_id}`}><button className="text-center px-4 py-2 bg-teal-400 w-1/3">View Details</button></Link>
-                </Card>
-          </PhotoView>
-        </PhotoProvider>
-               
+                    <p className="text-gray-800 mb-6">{description.length>100 ? description.slice(0,100) + '...': description}</p>
+                    <Link to={`/services/${_id}`} className="my-4 px-4 py-2 bg-teal-400 rounded-md">View details...</Link>
+                </div>              
+          </PhotoProvider>              
             
         </div>
     );
