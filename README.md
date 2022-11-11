@@ -1,3 +1,38 @@
+# project Name : Eye Care
+
+# Live Site : [https://it-learner-90735.web.app/]
+
+# Project Summary
+This project is a eye doctor website that provides different services on eye treatment. A user Can take 6 types of services. A highly qualified doctor is here to serve you.
+
+# Features & functionality :
+* Eye treatment platform that provides access to high quality services.
+* registered clients can add their reviews on the services.
+* there are 6 types of eye treatment services
+* User Authentication with email & password , google and github.
+* Single Page Application.
+* responsive in any type of devices.
+
+# Technologies used :
+* React.js
+* React-Router
+* tailwind css
+* Flowbite Component library
+* React-icons
+* Firebase
+* Email Authentication
+* Google Authentication
+* github Authentication
+
+# Available Pages :
+* Home
+* services
+* Blog
+* login
+* register
+* Add reviews 
+* Add service
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

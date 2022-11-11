@@ -7,21 +7,28 @@ import useTitle from '../../hooks/useTitle';
 
 const MyReviews = () => {
 
-    const {user} = useContext(AuthContext)
+    const {user, logOut} = useContext(AuthContext)
 
     const [reviews, setReviews] = useState([])
 
     // dynamically loading reviews based on user email
     useEffect(() => {
         
-        fetch(`http://localhost:5000/reviews?email=${user?.email}`)
-        .then(res => res.json())
+        fetch(`http://localhost:5000/reviews?email=${user?.email}`, {
+            headers : { authorization : `Bearer ${localStorage.getItem('token')}`}
+        })
+        .then(res => {
+            if(res.status === 401 || res.status === 403) {
+                return logOut();
+            }
+            return res.json()})
         .then(data => setReviews(data))
 
-    },[user?.email])
+    },[user?.email, logOut])
 
     // deleting review 
     const handleDelete = (id) => {
+
         const proceed = window.confirm('Are you sure you want to delete this?')
         if(proceed){
             fetch(`http://localhost:5000/reviews/${id}`,{
@@ -41,7 +48,7 @@ const MyReviews = () => {
     }
 
     useTitle('My Reviews')
-    
+
     return (
         <div className="mx-auto my-24">
         {
