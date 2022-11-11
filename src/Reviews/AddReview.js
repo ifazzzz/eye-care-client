@@ -1,12 +1,14 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../Contexts/AuthProvider.js/AuthProvider';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const AddReview = ({id}) => {
 
     const serviceId = id;
 
-    const {user, loader} = useContext(AuthContext)
+    const {user} = useContext(AuthContext)
 
     const addReview = (event) => {
         event.preventDefault();
@@ -35,11 +37,11 @@ const AddReview = ({id}) => {
         })
         .then(res => res.json())
         .then(data => {
-            if(loader){
-                return <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-cyan-600"></div>
-            }
-            console.log(data)})
-
+           console.log(data)
+        if(data.acknowledged){
+            window.location.reload(true);
+            toast.success('review added successfully')
+        }})
     }
 
     return (

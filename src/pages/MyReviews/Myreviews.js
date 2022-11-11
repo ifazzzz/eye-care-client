@@ -1,12 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../Contexts/AuthProvider.js/AuthProvider';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import MyReviewsCard from './MyReviewsCard';
 
 const MyReviews = () => {
     const {user} = useContext(AuthContext)
-    console.log(user);
 
     const [reviews, setReviews] = useState([])
 
@@ -15,6 +14,7 @@ const MyReviews = () => {
         fetch(`http://localhost:5000/reviews?email=${user?.email}`)
         .then(res => res.json())
         .then(data => setReviews(data))
+
     },[user?.email])
 
     const handleDelete = (id) => {
@@ -25,21 +25,22 @@ const MyReviews = () => {
          })
          .then(res => res.json())
          .then(data => {
+            console.log(data);
             if(data.deletedCount > 0){
-                toast.success('deleted successfully')
-                const remaining = reviews.filter(rv => rv._id !== id);
-                 setReviews(remaining)
+                toast.success('Review deleted successfully')
+                const remaining = reviews.filter(mr => mr._id !== id)
+                setReviews(remaining)
             }
          })
         }
          
     }
     return (
-        <>
+        <div className="mx-auto my-24">
         {
             reviews.length === 0? 
-               <div>
-                   <h1>no reviews</h1>
+               <div className="my-auto">
+                   <h1 className="text-center text-5xl font-bold text-red-400">no reviews were added</h1>
                </div>
             :
             <div>
@@ -53,8 +54,8 @@ const MyReviews = () => {
         </div>
 
         }
-        <ToastContainer/>
-        </>
+        
+        </div>
     );
 };
 

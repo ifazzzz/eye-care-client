@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import img from '../../Assests/pexels-cottonbro-studio-7580252.jpg';
 import SignUp from '../../Authentication/Registration/SignUp';
+import AddedServices from '../AddService/AddedServices';
 import DefaultServices from './DefaultServices';
 
 const Home = () => {
@@ -67,7 +68,7 @@ const Home = () => {
             </div>
             
             {/* service section */}
-            <div className="my-36">
+            <div className="my-28">
                 <h1 className="text-4xl font-semibold text-center">
                     Services
                 </h1>
@@ -83,6 +84,8 @@ const Home = () => {
             <div className="container mb-8 mx-auto text-center">
                     <Link to='/services'><button className="bg-teal-400 rounded-md px-4 py-2 ">View All</button></Link>
             </div>
+            {/* added Services */}
+            <AddedServices></AddedServices>
             {/* feature section */}
             <div className="my-28">
             <SignUp/>
