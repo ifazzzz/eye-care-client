@@ -1,8 +1,18 @@
-import React from 'react';
+
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import EditReview from './EditReview';
 
 const MyReviewsCard = ({review, handleDelete}) => {
+
     const {name, message, _id, rating , photoURL} = review;
-    console.log(_id);
+
+    const [edit, setEdit] = useState(false)
+
+    const editReview = () => {
+        setEdit(true)
+    }
+
     return (
         <div className="my-12">
             <div className="container flex flex-col w-full max-w-lg p-6 mx-auto divide-y rounded-md divide-gray-300 bg-gray-50 text-gray-800">
@@ -25,10 +35,19 @@ const MyReviewsCard = ({review, handleDelete}) => {
                 </div>
                 <div className="p-4 space-y-2 text-sm text-gray-600">
                     <p>{message}</p>
-                <button className="text-lg text-yellow-500 mx-2">Edit</button>
+
+                <Link>
+                <button onClick={editReview} className="text-lg text-yellow-500 mx-2">Edit</button>
+                </Link>
+
                 <button onClick={() =>handleDelete(_id)} className="text-lg text-red-500 mx-2">Delete</button>
+
                 </div>
             </div>
+             {/*calling editReview page  */}
+            <div className="my-6">
+                {edit && <EditReview id={_id}></EditReview>}
+            </div>                
         </div>
     );
 };

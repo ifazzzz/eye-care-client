@@ -5,10 +5,12 @@ import 'react-toastify/dist/ReactToastify.css';
 import MyReviewsCard from './MyReviewsCard';
 
 const MyReviews = () => {
+
     const {user} = useContext(AuthContext)
 
     const [reviews, setReviews] = useState([])
 
+    // dynamically loading reviews based on user email
     useEffect(() => {
         
         fetch(`http://localhost:5000/reviews?email=${user?.email}`)
@@ -17,6 +19,7 @@ const MyReviews = () => {
 
     },[user?.email])
 
+    // deleting review 
     const handleDelete = (id) => {
         const proceed = window.confirm('Are you sure you want to delete this?')
         if(proceed){
@@ -32,6 +35,7 @@ const MyReviews = () => {
                 setReviews(remaining)
             }
          })
+         .catch(err => console.error(err))
         }
          
     }

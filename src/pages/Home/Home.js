@@ -6,7 +6,7 @@ import AddedServices from '../AddService/AddedServices';
 import DefaultServices from './DefaultServices';
 
 const Home = () => {
-
+     
     const [services, setServices] = useState([])
 
     useEffect(() => {
@@ -72,17 +72,22 @@ const Home = () => {
                 <h1 className="text-4xl font-semibold text-center">
                     Services
                 </h1>
-                <div className="my-12 container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {
+                    services.length === 0 ? <div className="mx-auto w-16 h-16 border-4 border-dashed rounded-full animate-spin border-sky-600"></div>
+                    :
+                    <div className="my-12 container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {
                         services.map(service => <DefaultServices
                         key={service._id}
                         service={service}
                         ></DefaultServices>)
                     }               
-                </div>
+                    </div>
+                }              
             </div>
+
             <div className="container mb-8 mx-auto text-center">
-                    <Link to='/services'><button className="bg-teal-400 rounded-md px-4 py-2 ">View All</button></Link>
+            <Link to='/services'><button className="bg-teal-400 rounded-md px-4 py-2 ">View All</button></Link>
             </div>
             {/* added Services */}
             <AddedServices></AddedServices>

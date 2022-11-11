@@ -11,11 +11,12 @@ const AddReview = ({id}) => {
     const {user} = useContext(AuthContext)
 
     const addReview = (event) => {
+
         event.preventDefault();
         const form = event.target
         const message = form.message.value;
         const rating = form.rating.value;
-
+        // necessary data to create a review
         const review = {
             name : user.displayName,
             photoURL : user.photoURL,
@@ -24,9 +25,7 @@ const AddReview = ({id}) => {
             rating : rating,
             message : message
         }
-        console.log(review);
-        form.reset();
-
+        // using post to add a review
         fetch('https://eye-care-server-ifazzzz.vercel.app/addReview', {
             method : 'POST',
             headers : {
@@ -39,12 +38,14 @@ const AddReview = ({id}) => {
         .then(data => {
            console.log(data)
         if(data.acknowledged){
-            window.location.reload(true);
+            form.reset();
             toast.success('review added successfully')
+            window.location.reload(true);
         }})
     }
 
     return (
+      // review form
         <div className="my-12">
             <div className="mx-auto w-full max-w-xl xl:px-8 xl:w-5/12">
               <div className="bg-white rounded shadow-2xl p-7 sm:p-10">

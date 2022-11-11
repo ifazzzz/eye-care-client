@@ -7,6 +7,7 @@ const ServiceReview = ({review}) => {
     return (
         <div className="my-12">
             <div className="container flex flex-col w-full  p-6 mx-auto divide-y rounded-md divide-gray-300 bg-gray-50 text-gray-800">
+
                 <div className="flex justify-between p-4">
                     <div className="flex space-x-4">
                         <div>
@@ -24,9 +25,11 @@ const ServiceReview = ({review}) => {
                         <span className="text-xl font-bold">{rating}</span>
                     </div>
                 </div>
+
                 <div className="p-4 space-y-2 text-sm text-gray-600">
                     <p>{message}</p>
                 </div>
+                
             </div>
         </div>
     );

@@ -15,7 +15,7 @@ const ServiceDetails = () => {
     const {_id, img, name, price, description, ratings} = service;
 
     const [reviews, setReviews] = useState([])
-
+    // dynamically loading reviews based on service id
     useEffect(() => {
         fetch(`https://eye-care-server-ifazzzz.vercel.app/reviews?id=${_id}`)
         .then(res => res.json())
@@ -23,14 +23,15 @@ const ServiceDetails = () => {
     },[_id])
 
     return (
+         
         <div className="container mx-auto my-36">
             <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-20">
+
                 <div className="w-full col-span-2 p-4 shadow-md bg-gray-50 text-gray-800 mx-auto">
                     <div className="flex justify-between pb-4 border-bottom">
                         <div className="flex items-center">
                             <p className="mb-0 capitalize text-gray-800">{price}</p>
-                        </div>
-                        
+                        </div>                       
                     </div>
                     <div className="space-y-4">
                         <div className="space-y-2">
@@ -63,19 +64,20 @@ const ServiceDetails = () => {
                             )
                         }
                     </div>                   
-                </div>               
+                </div>
+
             </div>
 
             <div className="my-12">
-                    {
-                        user?.uid?
-                        <div className="my-28">
-                        <h1 className="text-4xl font-semibold text-center">Please Add a Review</h1>
-                        <AddReview id={_id}></AddReview>
-                        </div>
-                        :
-                        <p className="p-2 text-center text-2xl font-bold bg-teal-400"> please <Link className="text-purple-600" to='/login'>login</Link> to add a review</p>
-                    }
+                {
+                    user?.uid?
+                    <div className="my-28">
+                    <h1 className="text-4xl font-semibold text-center">Please Add a Review</h1>
+                    <AddReview id={_id}></AddReview>
+                    </div>
+                    :
+                    <p className="p-2 text-center text-2xl font-bold bg-teal-400"> please <Link className="text-purple-600" to='/login'>login</Link> to add a review</p>
+                }
             </div>
 
         </div>
