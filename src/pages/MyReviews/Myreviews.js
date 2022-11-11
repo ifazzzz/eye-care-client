@@ -3,6 +3,7 @@ import { AuthContext } from '../../Contexts/AuthProvider.js/AuthProvider';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import MyReviewsCard from './MyReviewsCard';
+import useTitle from '../../hooks/useTitle';
 
 const MyReviews = () => {
 
@@ -36,9 +37,11 @@ const MyReviews = () => {
             }
          })
          .catch(err => console.error(err))
-        }
-         
+        }       
     }
+
+    useTitle('My Reviews')
+    
     return (
         <div className="mx-auto my-24">
         {

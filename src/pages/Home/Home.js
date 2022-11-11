@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import img from '../../Assests/pexels-cottonbro-studio-7580252.jpg';
 import SignUp from '../../Authentication/Registration/SignUp';
+import useTitle from '../../hooks/useTitle';
 import AddedServices from '../AddService/AddedServices';
 import DefaultServices from './DefaultServices';
 
@@ -15,6 +16,8 @@ const Home = () => {
         .then(data => setServices(data))
     },[])
 
+    useTitle('Home');
+    
     return (
         <div>
             {/* Banner section */}

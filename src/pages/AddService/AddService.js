@@ -1,6 +1,7 @@
 import React from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import useTitle from '../../hooks/useTitle';
 
 const AddService = () => {
 
@@ -20,7 +21,7 @@ const AddService = () => {
             ratings: ratings,
             description: description
         }
-console.log(service);
+
         fetch('http://localhost:5000/addedServices',{
             method: 'POST',
             headers: {
@@ -38,6 +39,8 @@ console.log(service);
         })
         .catch(err => console.error(err))
     }
+
+    useTitle('Add Service')
     return (
         <div>
             <section className="p-6 bg-gray-100 text-gray-900">

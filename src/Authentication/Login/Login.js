@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/AuthProvider.js/AuthProvider';
+import useTitle from '../../hooks/useTitle';
 
 const Login = () => {
 
@@ -47,6 +48,8 @@ const Login = () => {
          })
          .catch(err => {console.error(err)})
     }
+
+    useTitle('Login')
 
     return (
 

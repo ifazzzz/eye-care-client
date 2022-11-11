@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/AuthProvider.js/AuthProvider';
+import useTitle from '../../hooks/useTitle';
 import AddReview from '../../Reviews/AddReview';
 
 
@@ -21,6 +22,8 @@ const ServiceDetails = () => {
         .then(res => res.json())
         .then(data => setReviews(data))
     },[_id])
+
+    useTitle('Service Details')
 
     return (
          

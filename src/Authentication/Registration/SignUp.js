@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { AuthContext } from '../../Contexts/AuthProvider.js/AuthProvider';
 import image from '../../Assests/pexels-antoni-shkraba-6749742.jpg';
 import { Link } from 'react-router-dom';
+import useTitle from '../../hooks/useTitle';
 
 const SignUp = () => {
 
@@ -34,6 +35,8 @@ const SignUp = () => {
             .catch(error => console.error(error))
         }
     }
+
+    useTitle('Register')
 
     return (
         <div>
