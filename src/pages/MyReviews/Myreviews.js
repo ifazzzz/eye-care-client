@@ -14,7 +14,7 @@ const MyReviews = () => {
     // dynamically loading reviews based on user email
     useEffect(() => {
         
-        fetch(`http://localhost:5000/reviews?email=${user?.email}`, {
+        fetch(`https://eye-care-server-ifazzzz.vercel.app/reviews?email=${user?.email}`, {
             headers : { authorization : `Bearer ${localStorage.getItem('token')}`}
         })
         .then(res => {
@@ -31,7 +31,7 @@ const MyReviews = () => {
 
         const proceed = window.confirm('Are you sure you want to delete this?')
         if(proceed){
-            fetch(`http://localhost:5000/reviews/${id}`,{
+            fetch(`https://eye-care-server-ifazzzz.vercel.app/reviews/${id}`,{
             method: 'DELETE',
          })
          .then(res => res.json())

@@ -22,7 +22,7 @@ const AddService = () => {
             description: description
         }
 
-        fetch('http://localhost:5000/addedServices',{
+        fetch('https://eye-care-server-ifazzzz.vercel.app/addedServices',{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

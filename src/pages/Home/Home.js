@@ -17,7 +17,7 @@ const Home = () => {
     },[])
 
     useTitle('Home');
-    
+
     return (
         <div>
             {/* Banner section */}

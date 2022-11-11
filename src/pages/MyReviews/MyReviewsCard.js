@@ -5,7 +5,7 @@ import EditReview from './EditReview';
 
 const MyReviewsCard = ({review, handleDelete}) => {
 
-    const {name, message, _id, rating , photoURL} = review;
+    const {name, message, _id, rating , photoURL, time} = review;
 
     const [edit, setEdit] = useState(false)
 
@@ -23,7 +23,7 @@ const MyReviewsCard = ({review, handleDelete}) => {
                         </div>
                         <div>
                             <h4 className="font-bold">{name}</h4>
-                            <span className="text-xs text-gray-600">2 days ago</span>
+                            <span className="text-xs text-gray-600">{time} minutes ago</span>
                         </div>
                     </div>
                     <div className="flex items-center space-x-2 text-yellow-500">

@@ -10,6 +10,8 @@ const AddReview = ({id}) => {
 
     const {user} = useContext(AuthContext)
 
+    const time = new Date().getMinutes();
+
     const addReview = (event) => {
 
         event.preventDefault();
@@ -23,6 +25,7 @@ const AddReview = ({id}) => {
             email : user.email,
             serviceId : serviceId,
             rating : rating,
+            time : time,
             message : message
         }
         // using post to add a review

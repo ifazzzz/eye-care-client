@@ -17,7 +17,7 @@ const EditReview = ({id}) => {
         }
         form.reset();
         //  using patch to update the review
-        fetch(`http://localhost:5000/reviews/${id}`,{
+        fetch(`https://eye-care-server-ifazzzz.vercel.app/reviews/${id}`,{
             method : 'PATCH',
             headers : { 
                 'Content-Type': 'application/json'
